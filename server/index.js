@@ -105,13 +105,16 @@ app.get('/api/admin/rounds', (req, res) => {
 // --- Winner Selection Background Task ---
 // Runs every 5 minutes to check for expired rounds
 cron.schedule('*/5 * * * *', () => {
-  console.log('Checking for rounds needing winner selection...');
   const now = new Date();
   const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
 
   const roundsToClose = db.get('rounds')
     .filter(r => r.status === 'open' && new Date(r.deadline) <= oneHourAgo)
     .value();
+  
+  if (roundsToClose.length > 0) {
+    console.log(`[Cron] Found ${roundsToClose.length} rounds to close.`);
+  }
 
   roundsToClose.forEach(round => {
     console.log(`Selecting winner for round: ${round.id}`);

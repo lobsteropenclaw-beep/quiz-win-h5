@@ -1,0 +1,97 @@
+{
+  "rounds": [
+    {
+      "id": "87957a20-8d40-41de-859e-0d124fb2ea26",
+      "question": "What is 2 + 2?",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "correctIndex": 1,
+      "prize": "Test Credits",
+      "deadline": "2026-03-31T02:20:42Z",
+      "forecast": "Next: logic puzzle",
+      "status": "expired",
+      "createTime": "2026-03-31T02:19:42.259Z"
+    },
+    {
+      "id": "d97f5a68-656b-4091-afa3-8df9f94df5bb",
+      "question": "What is 2 + 2?",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "correctIndex": 1,
+      "prize": "Test Prize",
+      "deadline": "2026-03-31T02:21:51.585Z",
+      "forecast": "Next: Science",
+      "status": "expired",
+      "createTime": "2026-03-31T02:20:51.599Z"
+    },
+    {
+      "id": "69a1b2bc-672b-476a-8e76-0ba46e0a0901",
+      "question": "Fast test?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "correctIndex": 0,
+      "prize": "Quick Win",
+      "deadline": "2026-03-31T02:24:45Z",
+      "status": "expired",
+      "createTime": "2026-03-31T02:24:40.836Z"
+    },
+    {
+      "id": "d81f27ae-b6b2-48b8-b301-778e2fa1eb1a",
+      "question": "Real test?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "correctIndex": 0,
+      "prize": "Gold",
+      "deadline": "2026-03-31T02:26:18Z",
+      "status": "finished",
+      "createTime": "2026-03-31T02:26:13.278Z"
+    }
+  ],
+  "entries": [
+    {
+      "roundId": "d97f5a68-656b-4091-afa3-8df9f94df5bb",
+      "userId": "alice_id",
+      "nickname": "Alice",
+      "answerIndex": 1,
+      "isCorrect": true,
+      "timestamp": "2026-03-31T02:20:51.604Z"
+    },
+    {
+      "roundId": "d97f5a68-656b-4091-afa3-8df9f94df5bb",
+      "userId": "bob_id",
+      "nickname": "Bob",
+      "answerIndex": 0,
+      "isCorrect": false,
+      "timestamp": "2026-03-31T02:20:51.605Z"
+    },
+    {
+      "roundId": "d81f27ae-b6b2-48b8-b301-778e2fa1eb1a",
+      "userId": "alice",
+      "nickname": "Alice",
+      "answerIndex": 0,
+      "isCorrect": true,
+      "timestamp": "2026-03-31T02:26:13.347Z"
+    }
+  ],
+  "winners": [
+    {
+      "roundId": "d81f27ae-b6b2-48b8-b301-778e2fa1eb1a",
+      "userId": "alice",
+      "nickname": "Alice",
+      "prize": "Gold",
+      "timestamp": "2026-03-31T02:27:00.599Z"
+    }
+  ]
+}
