@@ -32,6 +32,10 @@ function Admin() {
   };
 
   const fetchEntries = async (roundId) => {
+    if (selectedRoundEntries?.roundId === roundId) {
+      setSelectedRoundEntries(null);
+      return;
+    }
     setLoadingEntries(true);
     try {
       const res = await axios.get(`${API_BASE}/admin/entries?secret=${SECRET}&roundId=${roundId}`);
@@ -40,6 +44,20 @@ function Admin() {
       alert('Failed to fetch entries');
     }
     setLoadingEntries(false);
+  };
+
+  const handleDeleteRound = async (roundId) => {
+    if (window.confirm('Are you sure you want to delete this round and all its entries?')) {
+      try {
+        await axios.delete(`${API_BASE}/admin/delete-round`, {
+          data: { secret: SECRET, roundId }
+        });
+        alert('Round deleted');
+        fetchRounds();
+      } catch (err) {
+        alert('Failed to delete round');
+      }
+    }
   };
 
   const handleOptionChange = (idx, val) => {
@@ -165,33 +183,43 @@ function Admin() {
         <div className="space-y-4">
           {rounds.map(r => (
             <div key={r.id} className="p-4 border-b border-slate-50 last:border-0">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-bold text-slate-700">{r.question}</p>
-                  <p className="text-xs text-slate-400 uppercase tracking-tighter">Prize: {r.prize} • Status: {r.status}</p>
-                </div>
-                <div className="flex items-center gap-3">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3 flex-grow min-w-0">
                   <button 
                     onClick={() => fetchEntries(r.id)}
-                    className="text-xs bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded-full transition-colors"
+                    className="flex-shrink-0 w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-bold hover:bg-slate-200 transition-colors"
                   >
-                    View Entries
+                    {selectedRoundEntries?.roundId === r.id ? '-' : '+'}
                   </button>
-                  {r.status === 'finished' && <CheckCircle className="text-green-500" size={20} />}
+                  <div className="truncate">
+                    <p className="font-bold text-slate-700 truncate">{r.question}</p>
+                    <p className="text-[10px] text-slate-400 uppercase tracking-tighter">Prize: {r.prize} • Status: {r.status}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  {r.status === 'finished' && <CheckCircle className="text-green-500" size={18} />}
+                  <button 
+                    onClick={() => handleDeleteRound(r.id)}
+                    className="p-2 text-slate-300 hover:text-red-500 transition-colors"
+                    title="Delete Round"
+                  >
+                    <Trash2 size={18} />
+                  </button>
                 </div>
               </div>
 
               {selectedRoundEntries?.roundId === r.id && (
-                <div className="mt-4 bg-slate-50 rounded-2xl p-4 overflow-hidden">
-                  <h4 className="text-xs font-black text-slate-400 uppercase mb-3">Participants</h4>
-                  {loadingEntries ? <p>Loading...</p> : (
-                    <div className="space-y-2">
-                      {selectedRoundEntries.data.length === 0 ? <p className="text-sm text-slate-400">No entries yet.</p> : 
+                <div className="mt-4 bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                  <h4 className="text-[10px] font-black text-slate-400 uppercase mb-3 tracking-widest">Participants</h4>
+                  {loadingEntries ? <p className="text-xs text-slate-400">Loading...</p> : (
+                    <div className="space-y-1">
+                      {selectedRoundEntries.data.length === 0 ? <p className="text-xs text-slate-400 italic">No entries yet.</p> : 
                         selectedRoundEntries.data.map((entry, eIdx) => (
-                          <div key={eIdx} className="flex justify-between items-center text-sm">
-                            <span className="font-bold text-slate-600">{entry.nickname}</span>
-                            <div className="flex gap-2 items-center">
-                              <span className="bg-white px-2 py-0.5 rounded border border-slate-200 text-xs">
+                          <div key={eIdx} className="flex justify-between items-center text-xs bg-white p-2 rounded-lg border border-slate-100 shadow-sm">
+                            <span className="font-bold text-slate-600 truncate mr-2">{entry.nickname}</span>
+                            <div className="flex gap-2 items-center shrink-0">
+                              <span className="bg-slate-50 px-1.5 py-0.5 rounded text-[10px] font-mono border border-slate-100">
                                 Choice: {['A','B','C','D'][entry.answerIndex]}
                               </span>
                               {entry.isCorrect ? 

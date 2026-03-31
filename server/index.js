@@ -111,6 +111,18 @@ app.get('/api/admin/entries', (req, res) => {
   res.json(entries);
 });
 
+// Admin: Delete a round
+app.delete('/api/admin/delete-round', (req, res) => {
+  const { secret, roundId } = req.body;
+  if (secret !== ADMIN_SECRET) return res.status(403).json({ error: 'Unauthorized' });
+
+  db.get('rounds').remove({ id: roundId }).write();
+  db.get('entries').remove({ roundId }).write();
+  db.get('winners').remove({ roundId }).write();
+
+  res.json({ success: true });
+});
+
 // --- Winner Selection Background Task ---
 // Runs every 5 minutes to check for expired rounds
 cron.schedule('*/5 * * * *', () => {
