@@ -261,11 +261,6 @@ function Admin() {
                 {/* Participants Drawer */}
                 {selectedRoundEntries?.roundId === r.id && (
                   <div className="bg-slate-50 border-t border-slate-100 px-5 py-6">
-                    <div className="flex items-center gap-2 mb-4">
-                      <User size={14} className="text-slate-400" />
-                      <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Live Data</h4>
-                    </div>
-                    
                     {loadingEntries ? (
                       <div className="text-center py-4 text-xs font-bold text-slate-300 animate-pulse italic">Connecting to database...</div>
                     ) : (
