@@ -111,31 +111,54 @@ function App() {
             {!submitted ? (
               <>
                 <h3 className="text-xl font-bold mb-6 leading-tight">{currentRound.question}</h3>
-                <div className="flex flex-col gap-4 mb-8">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px' }}>
                   {currentRound.options.map((opt, idx) => {
                     const isSelected = selectedOption === idx;
                     return (
                       <div 
                         key={idx}
                         onClick={() => setSelectedOption(idx)}
-                        className={`w-full p-4 rounded-2xl border-2 transition-all cursor-pointer flex flex-row items-center justify-between whitespace-nowrap ${
-                          isSelected 
-                            ? 'border-primary bg-primary text-white shadow-lg' 
-                            : 'border-slate-200 bg-white text-slate-700'
-                        }`}
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          padding: '16px',
+                          borderRadius: '16px',
+                          border: isSelected ? '2px solid #6200ee' : '2px solid #e2e8f0',
+                          backgroundColor: isSelected ? '#6200ee' : '#f8fafc',
+                          color: isSelected ? '#ffffff' : '#334155',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                          minHeight: '64px'
+                        }}
                       >
-                        <div className="flex flex-row items-center flex-grow min-w-0">
-                          <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3 ${
-                            isSelected ? 'bg-white text-primary' : 'bg-slate-100 text-slate-400'
-                          }`}>
-                            {['A', 'B', 'C', 'D'][idx]}
-                          </div>
-                          <div className="text-lg font-bold truncate">
-                            {opt}
-                          </div>
+                        <div style={{
+                          flexShrink: 0,
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontWeight: 'bold',
+                          marginRight: '12px',
+                          backgroundColor: isSelected ? '#ffffff' : '#e2e8f0',
+                          color: isSelected ? '#6200ee' : '#94a3b8'
+                        }}>
+                          {['A', 'B', 'C', 'D'][idx]}
+                        </div>
+                        <div style={{
+                          flexGrow: 1,
+                          fontSize: '18px',
+                          fontWeight: 'bold',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis'
+                        }}>
+                          {opt}
                         </div>
                         {isSelected && (
-                          <div className="flex-shrink-0 ml-2">
+                          <div style={{ flexShrink: 0, marginLeft: '8px' }}>
                             <CheckCircle2 size={24} />
                           </div>
                         )}
