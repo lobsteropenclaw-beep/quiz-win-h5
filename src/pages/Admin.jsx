@@ -274,13 +274,60 @@ function Admin() {
                           <div className="text-center py-8 border-2 border-dashed border-slate-200 rounded-2xl text-slate-300 text-xs font-bold uppercase italic">No entries recorded yet</div>
                         ) : (
                           selectedRoundEntries.data.map((entry, eIdx) => (
-                            <div key={eIdx} className="flex flex-row items-center justify-between bg-white p-3 rounded-xl shadow-sm border border-slate-100 min-h-[48px]">
-                              <span className="font-black text-slate-700 text-sm truncate mr-4 block">{entry.nickname}</span>
-                              <div className="flex flex-row items-center gap-2 shrink-0">
-                                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Choice:</span>
-                                <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-lg border ${
-                                  entry.isCorrect ? 'bg-green-50 text-green-600 border-green-100' : 'bg-slate-50 text-slate-500 border-slate-100'
-                                }`}>
+                            <div 
+                              key={eIdx} 
+                              style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                backgroundColor: '#ffffff',
+                                padding: '12px',
+                                borderRadius: '12px',
+                                border: '1px solid #f1f5f9',
+                                marginBottom: '8px',
+                                width: '100%',
+                                boxSizing: 'border-box'
+                              }}
+                            >
+                              <span style={{ 
+                                fontWeight: '900', 
+                                color: '#334155', 
+                                fontSize: '14px',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                                flexGrow: 1,
+                                marginRight: '16px'
+                              }}>
+                                {entry.nickname}
+                              </span>
+                              <div style={{ 
+                                display: 'flex', 
+                                flexDirection: 'row', 
+                                alignItems: 'center', 
+                                flexShrink: 0 
+                              }}>
+                                <span style={{ 
+                                  fontSize: '10px', 
+                                  color: '#94a3b8', 
+                                  fontWeight: 'bold', 
+                                  textTransform: 'uppercase',
+                                  marginRight: '8px'
+                                }}>
+                                  Choice:
+                                </span>
+                                <span style={{ 
+                                  fontSize: '10px', 
+                                  fontWeight: '900', 
+                                  textTransform: 'uppercase', 
+                                  padding: '4px 8px', 
+                                  borderRadius: '8px',
+                                  backgroundColor: entry.isCorrect ? '#f0fdf4' : '#f8fafc',
+                                  color: entry.isCorrect ? '#16a34a' : '#64748b',
+                                  border: entry.isCorrect ? '1px solid #dcfce7' : '1px solid #f1f5f9',
+                                  whiteSpace: 'nowrap'
+                                }}>
                                   {r.options[entry.answerIndex]}
                                 </span>
                               </div>
