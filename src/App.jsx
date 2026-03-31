@@ -111,29 +111,31 @@ function App() {
             {!submitted ? (
               <>
                 <h3 className="text-xl font-bold mb-6 leading-tight">{currentRound.question}</h3>
-                <div className="space-y-4 mb-8">
+                <div className="flex flex-col gap-4 mb-8">
                   {currentRound.options.map((opt, idx) => {
                     const isSelected = selectedOption === idx;
                     return (
                       <div 
                         key={idx}
                         onClick={() => setSelectedOption(idx)}
-                        className={`relative w-full p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center ${
+                        className={`w-full p-4 rounded-2xl border-2 transition-all cursor-pointer flex flex-row items-center justify-between whitespace-nowrap ${
                           isSelected 
                             ? 'border-primary bg-primary text-white shadow-lg' 
-                            : 'border-slate-200 bg-white text-slate-700 hover:border-primary/30'
+                            : 'border-slate-200 bg-white text-slate-700'
                         }`}
                       >
-                        <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold mr-4 ${
-                          isSelected ? 'bg-white text-primary' : 'bg-slate-100 text-slate-400'
-                        }`}>
-                          {['A', 'B', 'C', 'D'][idx]}
-                        </div>
-                        <div className="flex-grow text-lg font-medium pr-8">
-                          {opt}
+                        <div className="flex flex-row items-center flex-grow min-w-0">
+                          <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3 ${
+                            isSelected ? 'bg-white text-primary' : 'bg-slate-100 text-slate-400'
+                          }`}>
+                            {['A', 'B', 'C', 'D'][idx]}
+                          </div>
+                          <div className="text-lg font-bold truncate">
+                            {opt}
+                          </div>
                         </div>
                         {isSelected && (
-                          <div className="flex-shrink-0">
+                          <div className="flex-shrink-0 ml-2">
                             <CheckCircle2 size={24} />
                           </div>
                         )}
