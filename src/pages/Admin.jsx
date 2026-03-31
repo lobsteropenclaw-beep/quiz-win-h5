@@ -247,7 +247,7 @@ function Admin() {
                       {selectedRoundEntries?.roundId === r.id ? (
                         <>- Hide Details</>
                       ) : (
-                        <><Plus size={14} /> View Participants ({r.entryCount})</>
+                        <><Plus size={14} /> View Participants ({r.entryCount ?? 0})</>
                       )}
                     </button>
                     {r.status === 'finished' && (
@@ -274,12 +274,12 @@ function Admin() {
                           <div className="text-center py-8 border-2 border-dashed border-slate-200 rounded-2xl text-slate-300 text-xs font-bold uppercase italic">No entries recorded yet</div>
                         ) : (
                           selectedRoundEntries.data.map((entry, eIdx) => (
-                            <div key={eIdx} className="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-slate-100">
-                              <span className="font-black text-slate-700 text-sm truncate mr-4">{entry.nickname}</span>
-                              <div className="flex items-center gap-2 shrink-0">
+                            <div key={eIdx} className="flex flex-row items-center justify-between bg-white p-3 rounded-xl shadow-sm border border-slate-100 min-h-[48px]">
+                              <span className="font-black text-slate-700 text-sm truncate mr-4 block">{entry.nickname}</span>
+                              <div className="flex flex-row items-center gap-2 shrink-0">
                                 <span className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Choice:</span>
-                                <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-lg ${
-                                  entry.isCorrect ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-slate-50 text-slate-500 border border-slate-100'
+                                <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-lg border ${
+                                  entry.isCorrect ? 'bg-green-50 text-green-600 border-green-100' : 'bg-slate-50 text-slate-500 border-slate-100'
                                 }`}>
                                   {r.options[entry.answerIndex]}
                                 </span>

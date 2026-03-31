@@ -100,8 +100,9 @@ app.get('/api/admin/rounds', (req, res) => {
   const { secret } = req.query;
   if (secret !== ADMIN_SECRET) return res.status(403).json({ error: 'Unauthorized' });
   
+  const allEntries = db.get('entries').value();
   const rounds = db.get('rounds').value().map(r => {
-    const entryCount = db.get('entries').filter({ roundId: r.id }).size().value();
+    const entryCount = allEntries.filter(e => e.roundId === r.id).length;
     return { ...r, entryCount };
   });
   
