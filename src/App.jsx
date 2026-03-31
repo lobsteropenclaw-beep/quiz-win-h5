@@ -111,45 +111,35 @@ function App() {
             {!submitted ? (
               <>
                 <h3 className="text-xl font-bold mb-6 leading-tight">{currentRound.question}</h3>
-                <div className="flex flex-col gap-3 mb-8">
-                  {currentRound.options.map((opt, idx) => (
-                    <label 
-                      key={idx}
-                      className={`relative flex items-center p-5 rounded-2xl border-2 transition-all cursor-pointer ${
-                        selectedOption === idx 
-                          ? 'border-primary bg-primary/5 ring-1 ring-primary shadow-sm' 
-                          : 'border-slate-100 bg-slate-50'
-                      }`}
-                    >
-                      <input 
-                        type="radio"
-                        name="quiz-option"
-                        className="hidden"
-                        checked={selectedOption === idx}
-                        onChange={() => setSelectedOption(idx)}
-                      />
-                      
-                      <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center mr-4 shrink-0 transition-colors ${
-                        selectedOption === idx ? 'border-primary bg-primary' : 'border-slate-300 bg-white'
-                      }`}>
-                        <span className={`text-sm font-black ${selectedOption === idx ? 'text-white' : 'text-slate-400'}`}>
+                <div className="space-y-4 mb-8">
+                  {currentRound.options.map((opt, idx) => {
+                    const isSelected = selectedOption === idx;
+                    return (
+                      <div 
+                        key={idx}
+                        onClick={() => setSelectedOption(idx)}
+                        className={`relative w-full p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center ${
+                          isSelected 
+                            ? 'border-primary bg-primary text-white shadow-lg' 
+                            : 'border-slate-200 bg-white text-slate-700 hover:border-primary/30'
+                        }`}
+                      >
+                        <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold mr-4 ${
+                          isSelected ? 'bg-white text-primary' : 'bg-slate-100 text-slate-400'
+                        }`}>
                           {['A', 'B', 'C', 'D'][idx]}
-                        </span>
-                      </div>
-
-                      <span className={`text-lg transition-colors ${
-                        selectedOption === idx ? 'text-primary font-bold' : 'text-slate-700'
-                      }`}>
-                        {opt}
-                      </span>
-
-                      {selectedOption === idx && (
-                        <div className="absolute right-5 text-primary">
-                          <CheckCircle2 size={24} />
                         </div>
-                      )}
-                    </label>
-                  ))}
+                        <div className="flex-grow text-lg font-medium pr-8">
+                          {opt}
+                        </div>
+                        {isSelected && (
+                          <div className="flex-shrink-0">
+                            <CheckCircle2 size={24} />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
                 <button 
                   disabled={selectedOption === null}
