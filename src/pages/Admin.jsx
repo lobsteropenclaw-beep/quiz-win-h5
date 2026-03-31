@@ -130,16 +130,16 @@ function Admin() {
                 <label className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase ml-1">
                   <List size={14} className="text-primary" /> Options
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3">
                   {form.options.map((opt, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-[10px] font-black text-slate-400 shrink-0">
+                    <div key={idx} className="flex items-center bg-slate-50 border-2 border-transparent focus-within:border-primary/20 focus-within:bg-white rounded-xl transition-all overflow-hidden px-3">
+                      <div className="text-[10px] font-black text-slate-400 shrink-0 mr-3">
                         {['A','B','C','D'][idx]}
                       </div>
                       <input 
                         required
-                        placeholder={`Option ${['A','B','C','D'][idx]}`}
-                        className="w-full bg-slate-50 border-2 border-transparent focus:border-primary/20 focus:bg-white rounded-xl p-3 transition-all outline-none text-sm"
+                        placeholder={`Type option ${['A','B','C','D'][idx]} here...`}
+                        className="w-full bg-transparent py-3 outline-none text-sm font-medium"
                         value={opt}
                         onChange={e => handleOptionChange(idx, e.target.value)}
                       />
