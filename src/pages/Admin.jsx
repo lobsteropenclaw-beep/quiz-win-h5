@@ -130,16 +130,44 @@ function Admin() {
                 <label className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase ml-1">
                   <List size={14} className="text-primary" /> Options
                 </label>
-                <div className="grid grid-cols-1 gap-3">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {form.options.map((opt, idx) => (
-                    <div key={idx} className="flex items-center bg-slate-50 border-2 border-transparent focus-within:border-primary/20 focus-within:bg-white rounded-xl transition-all overflow-hidden px-3">
-                      <div className="text-[10px] font-black text-slate-400 shrink-0 mr-3">
+                    <div 
+                      key={idx} 
+                      style={{ 
+                        display: 'flex', 
+                        flexDirection: 'row', 
+                        alignItems: 'center', 
+                        backgroundColor: '#f8fafc', 
+                        borderRadius: '12px', 
+                        padding: '0 16px',
+                        minHeight: '48px',
+                        border: '1px solid #e2e8f0'
+                      }}
+                    >
+                      <div style={{ 
+                        fontSize: '12px', 
+                        fontWeight: '900', 
+                        color: '#94a3b8', 
+                        marginRight: '12px',
+                        width: '20px',
+                        flexShrink: 0
+                      }}>
                         {['A','B','C','D'][idx]}
                       </div>
                       <input 
                         required
-                        placeholder={`Type option ${['A','B','C','D'][idx]} here...`}
-                        className="w-full bg-transparent py-3 outline-none text-sm font-medium"
+                        placeholder={`Option ${['A','B','C','D'][idx]}...`}
+                        style={{ 
+                          width: '100%', 
+                          backgroundColor: 'transparent', 
+                          border: 'none', 
+                          outline: 'none', 
+                          padding: '12px 0',
+                          fontSize: '14px',
+                          fontWeight: '500',
+                          color: '#334155'
+                        }}
                         value={opt}
                         onChange={e => handleOptionChange(idx, e.target.value)}
                       />
