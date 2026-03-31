@@ -99,7 +99,13 @@ app.post('/api/admin/create-round', (req, res) => {
 app.get('/api/admin/rounds', (req, res) => {
   const { secret } = req.query;
   if (secret !== ADMIN_SECRET) return res.status(403).json({ error: 'Unauthorized' });
-  res.json(db.get('rounds').value());
+  
+  const rounds = db.get('rounds').value().map(r => {
+    const entryCount = db.get('entries').filter({ roundId: r.id }).size().value();
+    return { ...r, entryCount };
+  });
+  
+  res.json(rounds);
 });
 
 // Admin: Get entries for a round

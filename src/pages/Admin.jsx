@@ -247,7 +247,7 @@ function Admin() {
                       {selectedRoundEntries?.roundId === r.id ? (
                         <>- Hide Details</>
                       ) : (
-                        <><Plus size={14} /> View Participants ({r.id === selectedRoundEntries?.roundId ? selectedRoundEntries.data.length : '...'})</>
+                        <><Plus size={14} /> View Participants ({r.entryCount})</>
                       )}
                     </button>
                     {r.status === 'finished' && (
@@ -276,11 +276,14 @@ function Admin() {
                           selectedRoundEntries.data.map((entry, eIdx) => (
                             <div key={eIdx} className="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-slate-100">
                               <span className="font-black text-slate-700 text-sm truncate mr-4">{entry.nickname}</span>
-                              <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-lg shrink-0 ${
-                                entry.isCorrect ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-slate-50 text-slate-400 border border-slate-100'
-                              }`}>
-                                {r.options[entry.answerIndex]}
-                              </span>
+                              <div className="flex items-center gap-2 shrink-0">
+                                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Choice:</span>
+                                <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-lg ${
+                                  entry.isCorrect ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-slate-50 text-slate-500 border border-slate-100'
+                                }`}>
+                                  {r.options[entry.answerIndex]}
+                                </span>
+                              </div>
                             </div>
                           ))
                         )}
