@@ -102,6 +102,15 @@ app.get('/api/admin/rounds', (req, res) => {
   res.json(db.get('rounds').value());
 });
 
+// Admin: Get entries for a round
+app.get('/api/admin/entries', (req, res) => {
+  const { secret, roundId } = req.query;
+  if (secret !== ADMIN_SECRET) return res.status(403).json({ error: 'Unauthorized' });
+  
+  const entries = db.get('entries').filter({ roundId }).value();
+  res.json(entries);
+});
+
 // --- Winner Selection Background Task ---
 // Runs every 5 minutes to check for expired rounds
 cron.schedule('*/5 * * * *', () => {
