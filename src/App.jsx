@@ -118,14 +118,14 @@ function App() {
                       onClick={() => setSelectedOption(idx)}
                       className={`p-4 rounded-2xl border-2 transition-all flex items-center gap-3 active:scale-[0.98] ${
                         selectedOption === idx 
-                          ? 'border-primary bg-primary text-white shadow-lg shadow-primary/30 scale-[1.02]' 
+                          ? 'border-yellow-500 bg-yellow-100 text-slate-900 shadow-md scale-[1.02]' 
                           : 'border-slate-100 bg-slate-50 text-slate-700'
                       }`}
                     >
                       <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                        selectedOption === idx ? 'border-white bg-white' : 'border-slate-300'
+                        selectedOption === idx ? 'border-yellow-500 bg-yellow-500' : 'border-slate-300'
                       }`}>
-                        {selectedOption === idx && <div className="w-2 h-2 bg-primary rounded-full" />}
+                        {selectedOption === idx && <div className="w-2 h-2 bg-white rounded-full" />}
                       </div>
                       <span className="font-bold">
                         {['A', 'B', 'C', 'D'][idx]}. {opt}
