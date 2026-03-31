@@ -107,7 +107,6 @@ function Admin() {
         {/* Create Round Section */}
         <section>
           <div className="flex items-center gap-2 mb-4 px-2 text-slate-400">
-            <Plus size={16} />
             <h2 className="text-xs font-black uppercase tracking-[0.2em]">New Competition</h2>
           </div>
           
@@ -237,7 +236,6 @@ function Admin() {
         {/* Competition History Section */}
         <section>
           <div className="flex items-center gap-2 mb-4 px-2 text-slate-400">
-            <List size={16} />
             <h2 className="text-xs font-black uppercase tracking-[0.2em]">History & Participants</h2>
           </div>
 
