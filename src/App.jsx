@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Trophy, Timer, Send, CheckCircle2, User } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
 function App() {
   const [currentRound, setCurrentRound] = useState(null);

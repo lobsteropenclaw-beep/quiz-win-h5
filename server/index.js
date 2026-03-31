@@ -13,7 +13,9 @@ const db = low(adapter);
 db.defaults({ rounds: [], entries: [], winners: [] }).write();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: '*' // Allow all origins for the prize program to work easily in WeChat
+}));
 app.use(express.json());
 
 const ADMIN_SECRET = 'admin123'; // Simple secret for admin actions
