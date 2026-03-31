@@ -245,9 +245,9 @@ function Admin() {
                       className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-slate-50 text-slate-600 text-xs font-black uppercase tracking-widest hover:bg-primary hover:text-white transition-all"
                     >
                       {selectedRoundEntries?.roundId === r.id ? (
-                        <>Hide Participants</>
+                        <>- Hide Details</>
                       ) : (
-                        <><Plus size={14} /> View {r.id === selectedRoundEntries?.roundId ? '' : 'Entries'}</>
+                        <><Plus size={14} /> View Participants ({r.id === selectedRoundEntries?.roundId ? selectedRoundEntries.data.length : '...'})</>
                       )}
                     </button>
                     {r.status === 'finished' && (
@@ -274,21 +274,13 @@ function Admin() {
                           <div className="text-center py-8 border-2 border-dashed border-slate-200 rounded-2xl text-slate-300 text-xs font-bold uppercase italic">No entries recorded yet</div>
                         ) : (
                           selectedRoundEntries.data.map((entry, eIdx) => (
-                            <div key={eIdx} className="flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-                              <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-xs font-black text-slate-400 border border-slate-100">
-                                  {entry.nickname.charAt(0).toUpperCase()}
-                                </div>
-                                <span className="font-black text-slate-700 text-sm">{entry.nickname}</span>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-lg ${
-                                  entry.isCorrect ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-400'
-                                }`}>
-                                  Choice {['A','B','C','D'][entry.answerIndex]}
-                                </span>
-                                {entry.isCorrect ? <CheckCircle size={16} className="text-green-500" /> : <div className="w-4 h-4 rounded-full border-2 border-red-100" />}
-                              </div>
+                            <div key={eIdx} className="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-slate-100">
+                              <span className="font-black text-slate-700 text-sm truncate mr-4">{entry.nickname}</span>
+                              <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-lg shrink-0 ${
+                                entry.isCorrect ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-slate-50 text-slate-400 border border-slate-100'
+                              }`}>
+                                {r.options[entry.answerIndex]}
+                              </span>
                             </div>
                           ))
                         )}
