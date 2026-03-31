@@ -250,11 +250,6 @@ function Admin() {
                         <><Plus size={14} /> View Participants ({r.entryCount ?? 0})</>
                       )}
                     </button>
-                    {r.status === 'finished' && (
-                      <div className="w-12 flex items-center justify-center bg-green-50 text-green-500 rounded-2xl">
-                        <CheckCircle size={20} />
-                      </div>
-                    )}
                   </div>
                 </div>
 
